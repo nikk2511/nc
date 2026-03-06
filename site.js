@@ -1608,3 +1608,580 @@ function renderCategoryCards() {
     .join("");
 }
 
+const PRODUCT_OVERRIDES = {
+  "saffron-trace-runner": {
+    name: "Rose Scallop Napkin Set",
+    line: "Gathering Table",
+    category: "Table Linen",
+    price: 2090,
+    compareAt: 2590,
+    tag: "Host Favorite",
+    artLabel: "SCALLOPED EDGE",
+    excerpt: "A soft pink napkin set with scalloped edging that brightens a place setting without feeling loud.",
+    description: "This set is built for easy hosting. The washed fabric falls softly, while the scalloped finish gives the table enough character on its own.",
+    material: "Soft washed cotton-linen with contrast scallop trim",
+    craft: "Cut, washed, and edge-finished in small studio batches",
+    care: "Machine wash cold. Warm iron for a sharper fold.",
+    impact: "Reusable textile alternative to disposable hosting pieces.",
+    sizes: ["Set of 4", "Set of 6", "Set of 8"],
+    colors: [
+      { name: "Rose Petal", value: "#d78892" },
+      { name: "Milk", value: "#f4e6df" },
+      { name: "Coral Trim", value: "#d36b75" }
+    ],
+    features: [
+      "Scalloped edge finish",
+      "Gift-ready stack",
+      "Pairs with runners and placemats"
+    ],
+    featured: true
+  },
+  "clay-bloom-serving-bowl": {
+    name: "Walnut Chain-Rim Bowl",
+    line: "Table Object",
+    category: "Decor",
+    price: 2890,
+    compareAt: 3390,
+    tag: "Hand Cast",
+    artLabel: "WOOD + METAL",
+    excerpt: "A warm wooden serving bowl finished with a sculpted chain rim for tables, shelves, and host gifting.",
+    description: "This bowl has enough weight to hold fruit or serve bread, but it also looks complete as a standalone table object. The mixed-material rim gives it a more elevated finish than a plain wood piece.",
+    material: "Polished wood body with silver-toned decorative rim",
+    craft: "Turned, finished, and rim-set in short production runs",
+    care: "Wipe clean with a soft cloth. Avoid prolonged soaking.",
+    impact: "Long-life serving piece designed for repeated seasonal styling.",
+    sizes: ["Medium", "Large"],
+    colors: [
+      { name: "Walnut", value: "#7c4f2e" },
+      { name: "Silver", value: "#c6c7cb" },
+      { name: "Warm Oak", value: "#b27d58" }
+    ],
+    features: [
+      "Decorative chain rim",
+      "Works on tables or consoles",
+      "Strong host-gift profile"
+    ],
+    featured: true
+  },
+  "reed-halo-lantern": {
+    name: "Slate Kitchen Textile Set",
+    line: "Home Utility",
+    category: "Decor",
+    price: 1890,
+    compareAt: 2290,
+    tag: "New Arrival",
+    artLabel: "SOFT KITCHEN",
+    excerpt: "A tonal pair of kitchen towels designed to soften shelving, hooks, and everyday prep spaces.",
+    description: "The set brings pattern and texture into the kitchen without looking busy. It works as styling and daily function, so the room feels finished even when used every day.",
+    material: "Washed cotton kitchen towels",
+    craft: "Cut and hemmed with hanging loops for open storage",
+    care: "Machine wash cold. Tumble low or line dry.",
+    impact: "Reusable textile alternative to paper-heavy kitchen routines.",
+    sizes: ["Set of 2"],
+    colors: [
+      { name: "Slate", value: "#6f7783" },
+      { name: "Mist", value: "#adb3bc" },
+      { name: "Ivory", value: "#efe8dc" }
+    ],
+    features: [
+      "Two-pattern pairing",
+      "Hook-ready loops",
+      "Shelving-friendly palette"
+    ],
+    featured: true
+  },
+  "noor-wrap-co-ord": {
+    name: "Noor Embroidered Co-Ord",
+    line: "Holiday Wardrobe",
+    category: "Fashion",
+    price: 5990,
+    compareAt: 6990,
+    tag: "Signature Fit",
+    artLabel: "SOFT DRAPE",
+    excerpt: "An easy pink co-ord with embellished shoulder detailing and a relaxed holiday silhouette.",
+    description: "The shape is loose enough for warm weather but still polished. Delicate shoulder embellishment gives the set a dressed-up point of view without making it heavy.",
+    material: "Soft cotton blend with light structure",
+    craft: "Garment washed and finished with tonal embroidery accents",
+    care: "Cold wash or dry clean. Steam lightly before wear.",
+    impact: "Made in small runs to reduce overproduction.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: [
+      { name: "Pink Bloom", value: "#f06aa7" },
+      { name: "Shell", value: "#f4e8df" },
+      { name: "Mocha", value: "#886b61" }
+    ],
+    features: [
+      "Relaxed tailored fit",
+      "Shoulder embellishment",
+      "Easy holiday dressing"
+    ],
+    featured: true
+  },
+  "mira-panel-dress": {
+    name: "Mira Meadow Co-Ord",
+    line: "Soft Structure",
+    category: "Fashion",
+    price: 6290,
+    compareAt: 7390,
+    tag: "Editor's Pick",
+    artLabel: "GREEN SET",
+    excerpt: "A saturated green two-piece set that keeps a clean line while still feeling easy and breathable.",
+    description: "The mirrored top and trouser pairing is designed for a sharp color statement with minimal styling effort. It is a strong fashion card for the Natural Craft homepage because the silhouette reads clearly at first glance.",
+    material: "Lightweight cotton blend with a washed finish",
+    craft: "Pattern-matched panels with covered finishing",
+    care: "Gentle machine wash. Warm iron on reverse.",
+    impact: "Cut with low-waste marker planning.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: [
+      { name: "Meadow Green", value: "#6b8b44" },
+      { name: "Olive Light", value: "#96aa69" },
+      { name: "Shell", value: "#efe4d8" }
+    ],
+    features: [
+      "Color-led statement set",
+      "Soft breathable handle",
+      "Easy day-to-evening styling"
+    ],
+    featured: true
+  },
+  "arav-camp-shirt-set": {
+    name: "Azure Block Gift Set",
+    line: "Gift Bundle",
+    category: "Gift Sets",
+    price: 2890,
+    compareAt: 3390,
+    tag: "Ready to Gift",
+    artLabel: "FOLDED SET",
+    excerpt: "A blue block-print textile bundle folded and wrapped for premium festive gifting.",
+    description: "Made for easy gifting, this bundle arrives folded, banded, and ready to hand over. The print is classic enough to use year-round, so it works for hosts, family gifting, and festive orders.",
+    material: "Soft cotton textile bundle with branded wrap band",
+    craft: "Printed, folded, and gift-packed by hand",
+    care: "Machine wash cold. Warm iron if needed.",
+    impact: "Reusable host gift that replaces disposable gifting.",
+    sizes: ["Set of 6", "Set of 8"],
+    colors: [
+      { name: "Ink Blue", value: "#334e83" },
+      { name: "Sky", value: "#9fc1eb" },
+      { name: "Milk", value: "#f4efe7" }
+    ],
+    features: [
+      "Pre-stacked gift format",
+      "Hosting-friendly print",
+      "Easy festive gifting"
+    ],
+    featured: true
+  },
+  "sol-stripe-lounge-set": {
+    name: "Fuchsia Lace Gift Set",
+    line: "Gift Bundle",
+    category: "Gift Sets",
+    price: 2690,
+    compareAt: 3190,
+    tag: "Gift Favorite",
+    artLabel: "LACE EDGE",
+    excerpt: "A vivid pink stack of lace-edged napkins that looks premium before it is even unwrapped.",
+    description: "This gift set is strong on visual impact. The color reads instantly, while the lace edge makes the bundle feel more special for festive tables and host gifting.",
+    material: "Cotton napkin stack with lace edge finish",
+    craft: "Cut, stacked, and hand-banded for ready gifting",
+    care: "Machine wash cold. Iron on low to restore crisp edges.",
+    impact: "Reusable table gift designed for repeated use through the season.",
+    sizes: ["Set of 6", "Set of 8"],
+    colors: [
+      { name: "Fuchsia", value: "#ea2f74" },
+      { name: "Berry", value: "#c22863" },
+      { name: "Blush", value: "#f4d7df" }
+    ],
+    features: [
+      "Lace-finished edges",
+      "Strong festive color",
+      "Ready-to-gift presentation"
+    ],
+    featured: true
+  },
+  "meadow-quilt-cover": {
+    name: "Meadow Quilt Layer",
+    line: "Bedroom Ritual",
+    category: "Bedroom",
+    price: 4790,
+    compareAt: 5590,
+    tag: "Sleep Edit",
+    artLabel: "SOFT BED",
+    excerpt: "A calm bedroom layer built around soft neutrals, tactile bedding, and quiet contrast at the bedside.",
+    description: "This bedroom story is about making the bed feel complete without overloading it. The layered look stays clean and light, which helps the room read softer and more restful.",
+    material: "Cotton quilt layer with tonal pillow mix",
+    craft: "Layered bedding concept with contrast texture and easy pairing",
+    care: "Build with two pillow scales and one warm bedside light.",
+    impact: "Encourages long-life bedding and low-clutter styling.",
+    sizes: ["Queen", "King"],
+    colors: [
+      { name: "Soft Stone", value: "#ddd8d3" },
+      { name: "Fog Blue", value: "#99aeca" },
+      { name: "Ash", value: "#868a92" }
+    ],
+    features: [
+      "Light layer for all seasons",
+      "Relaxed hotel-like finish",
+      "Works with neutral bed frames"
+    ],
+    featured: true
+  },
+  "cedar-brass-board": {
+    name: "Verdant Living Room Edit",
+    line: "Room Story",
+    category: "Decor",
+    price: 2390,
+    compareAt: 2890,
+    tag: "Styled Corner",
+    artLabel: "ROOM STORY",
+    excerpt: "A warm living-room styling direction built around leather, framed walls, and collected textures.",
+    description: "This home decor edit shows how Natural Craft can sit inside a fuller interior story rather than a product-only catalog. It is meant to inspire room styling with strong tones and softer layered objects.",
+    material: "Mixed upholstery, framed art, and layered soft furnishings",
+    craft: "Curated room styling built around tonal contrast and lived-in texture",
+    care: "Style with warm metals, quiet neutrals, and one strong wall tone.",
+    impact: "Editorial decor direction that extends the Natural Craft world.",
+    sizes: ["Styled corner"],
+    colors: [
+      { name: "Verdant", value: "#1d4f52" },
+      { name: "Caramel", value: "#b77744" },
+      { name: "Ivory", value: "#efe8dd" }
+    ],
+    features: [
+      "Gallery wall inspiration",
+      "Leather plus textile contrast",
+      "Works with brass and stone"
+    ],
+    featured: true
+  },
+  "haze-cushion-pair": {
+    name: "Haze Cushion Pair",
+    line: "Bedroom Accent",
+    category: "Bedroom",
+    price: 1990,
+    compareAt: 2390,
+    tag: "Layering Piece",
+    artLabel: "SOFT EDGE",
+    excerpt: "A soft neutral cushion pairing that bridges quilts, throws, and upholstered corners with ease.",
+    description: "Use the pair on a bed, bench, or day chair. The tones stay intentionally quiet so the texture reads before the color does, which makes them easy to layer into almost any room.",
+    material: "Washed cotton-linen with concealed zipper",
+    craft: "Piped edge and reversible face pairing",
+    care: "Cold wash gentle. Dry in shade.",
+    impact: "Ships flat to reduce packaging bulk.",
+    sizes: ["18 x 18 in", "20 x 20 in"],
+    colors: [
+      { name: "Warm Sand", value: "#d2c3b0" },
+      { name: "Milk", value: "#f4e8dd" },
+      { name: "Stone", value: "#9d9a95" }
+    ],
+    features: [
+      "Reversible styling",
+      "Quiet texture for layering",
+      "Sold as a pair"
+    ],
+    featured: true
+  },
+  "loomed-picnic-edit": {
+    name: "Entertaining Table Set",
+    line: "Host Table",
+    category: "Table Linen",
+    price: 3290,
+    compareAt: 3890,
+    tag: "Bundle",
+    artLabel: "HOST TABLE",
+    excerpt: "A dining set built for entertaining, with softly folded napkins that make the table feel complete fast.",
+    description: "This tabletop edit is the kind of piece you can set down five minutes before guests arrive and still get a polished result. It is useful, giftable, and easy to style with ceramics, glassware, and fruit.",
+    material: "Coordinated cotton table linens for everyday hosting",
+    craft: "Folded and bundled from Natural Craft tabletop basics",
+    care: "Machine wash cold. Iron lightly for a sharper presentation.",
+    impact: "Reusable hosting essentials designed to replace disposable table setups.",
+    sizes: ["4 person", "6 person"],
+    colors: [
+      { name: "Stone", value: "#d6c3ae" },
+      { name: "Wine", value: "#78293f" },
+      { name: "Olive", value: "#79895f" }
+    ],
+    features: [
+      "Host-ready bundle",
+      "Easy place-setting polish",
+      "Mixes with ceramics and brass"
+    ],
+    featured: true
+  }
+};
+
+STORE.products = STORE.products.map((product) => {
+  const override = PRODUCT_OVERRIDES[product.slug];
+  return override ? { ...product, ...override } : product;
+});
+
+const nextProductId = STORE.products.reduce((max, product) => Math.max(max, product.id), 0) + 1;
+const SUPPLEMENTAL_PRODUCTS = [
+  {
+    id: nextProductId,
+    slug: "tara-holiday-co-ord",
+    name: "Tara Holiday Co-Ord",
+    line: "Weekend Wardrobe",
+    category: "Fashion",
+    price: 5690,
+    compareAt: 6490,
+    tag: "New Arrival",
+    artLabel: "PINK SET",
+    palette: ["#f4d6df", "#cb6f94", "#94807c", "#fff4ef"],
+    excerpt: "A relaxed pink shirt-and-short co-ord designed for travel days, brunch dressing, and warm evenings.",
+    description: "This set keeps the styling simple by doing the work in one move. The roomy shirt and short combination feels easy, but the silhouette still reads clean and put together.",
+    material: "Light cotton blend with a smooth finish",
+    craft: "Cut in small batches with a relaxed resort proportion",
+    care: "Cold wash. Steam lightly before wear.",
+    impact: "Short-run production to limit overstock.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: [
+      { name: "Holiday Pink", value: "#eb7fa6" },
+      { name: "Rose Shell", value: "#f1dfe4" },
+      { name: "Stone", value: "#9b8f8d" }
+    ],
+    features: [
+      "Matching shirt and short",
+      "Easy resort silhouette",
+      "Clean one-step styling"
+    ],
+    featured: true
+  },
+  {
+    id: nextProductId + 1,
+    slug: "citrus-host-gift-set",
+    name: "Citrus Host Gift Set",
+    line: "Gift Bundle",
+    category: "Gift Sets",
+    price: 3090,
+    compareAt: 3590,
+    tag: "Festive Pick",
+    artLabel: "PRINTED SET",
+    palette: ["#f1deb9", "#d7b247", "#83935b", "#fff5e7"],
+    excerpt: "A cheerful lemon-print textile bundle that works as a host gift, table refresh, or festive add-on order.",
+    description: "The citrus print makes this the most playful gift set in the mix. It lands well for hosts because it feels useful, bright, and immediately displayable on the table.",
+    material: "Printed cotton textile set with branded paper wrap",
+    craft: "Printed, folded, and tied for gift-ready presentation",
+    care: "Machine wash cold. Warm iron on reverse if needed.",
+    impact: "Reusable gifting alternative with long after-use value.",
+    sizes: ["Set of 4", "Set of 6"],
+    colors: [
+      { name: "Citrus", value: "#d1b247" },
+      { name: "Leaf", value: "#7d9152" },
+      { name: "Soft Cream", value: "#f4ebda" }
+    ],
+    features: [
+      "Bright host-gift print",
+      "Festive but usable year-round",
+      "Easy premium presentation"
+    ],
+    featured: true
+  },
+  {
+    id: nextProductId + 2,
+    slug: "quiet-night-bedside-edit",
+    name: "Quiet Night Bedside Edit",
+    line: "Bedroom Styling",
+    category: "Bedroom",
+    price: 2590,
+    compareAt: 3090,
+    tag: "Bedroom Focus",
+    artLabel: "BEDSIDE CALM",
+    palette: ["#d7d6d5", "#8ea0bc", "#6c737c", "#f7f3ee"],
+    excerpt: "A bedside styling edit with low-contrast bedding, a warm lamp glow, and enough texture to soften the room.",
+    description: "This bedroom vignette is about restraint. A simple nightstand, one warm light source, and layered textiles create a calmer, more premium sleeping space without excess decor.",
+    material: "Layered bedding, soft cushions, and bedside lighting",
+    craft: "Editorial bedroom styling based on contrast between light fabric and warm wood",
+    care: "Pair with one soft lamp, two pillow scales, and clean surrounding surfaces.",
+    impact: "Promotes longer-life bedroom basics over fast decor turnover.",
+    sizes: ["Styled vignette"],
+    colors: [
+      { name: "Cloud", value: "#d9d7d5" },
+      { name: "Ink Blue", value: "#5a6f91" },
+      { name: "Soft Ash", value: "#8e9198" }
+    ],
+    features: [
+      "Warm bedside atmosphere",
+      "Low-clutter bedroom reference",
+      "Soft layered contrast"
+    ],
+    featured: true
+  }
+].filter((product) => !STORE.products.some((existing) => existing.slug === product.slug));
+
+STORE.products = [...STORE.products, ...SUPPLEMENTAL_PRODUCTS];
+
+Object.assign(MEDIA.categories, {
+  "Table Linen": "assets/natural-craft/hero-alt-3.png",
+  "Decor": "assets/natural-craft/decor-living.jpg",
+  "Fashion": "assets/natural-craft/hero-alt-2.png",
+  "Gift Sets": "assets/natural-craft/promo-8-1.jpg",
+  "Bedroom": "assets/natural-craft/christopher-jolly.jpg"
+});
+
+Object.assign(MEDIA.products, {
+  "dune-bloom-napkin-set": "assets/natural-craft/product-15a.jpg",
+  "saffron-trace-runner": "assets/natural-craft/product-33a.jpg",
+  "loomed-picnic-edit": "assets/natural-craft/extra-99.png",
+  "clay-bloom-serving-bowl": "assets/natural-craft/p1130178.jpg",
+  "reed-halo-lantern": "assets/natural-craft/extra-100.png",
+  "cedar-brass-board": "assets/natural-craft/decor-living.jpg",
+  "noor-wrap-co-ord": "assets/natural-craft/promo-44.png",
+  "mira-panel-dress": "assets/natural-craft/product-94.png",
+  "tara-holiday-co-ord": "assets/natural-craft/extra-31.png",
+  "arav-camp-shirt-set": "assets/natural-craft/promo-8-1.jpg",
+  "sol-stripe-lounge-set": "assets/natural-craft/promo-3-1.jpg",
+  "citrus-host-gift-set": "assets/natural-craft/product-5.jpg",
+  "meadow-quilt-cover": "assets/natural-craft/bedroom-alt.jpg",
+  "haze-cushion-pair": "assets/natural-craft/bedroom-main.jpg",
+  "quiet-night-bedside-edit": "assets/natural-craft/christopher-jolly.jpg"
+});
+
+const HOME_CATEGORY_IDS = ["Table Linen", "Decor", "Fashion", "Gift Sets", "Bedroom"];
+
+const HOME_SHOWCASES = {
+  "Table Linen": {
+    badge: "Dining Edit",
+    title: "Table linen that makes hosting feel considered from the first glance.",
+    copy: "The table edit now has enough depth to feel intentional: one strong campaign image, one supporting detail shot, and three aligned products instead of a generic mixed grid.",
+    image: "assets/natural-craft/hero-alt-3.png",
+    accentImage: "assets/natural-craft/extra-99.png",
+    notes: ["Scalloped napkins", "Host-ready bundles", "Soft washed finish"],
+    products: ["dune-bloom-napkin-set", "saffron-trace-runner", "loomed-picnic-edit"]
+  },
+  "Decor": {
+    badge: "Living Spaces",
+    title: "Home decor now reads like a full room story instead of leftover products.",
+    copy: "This edit mixes object-led pieces with styled room imagery so the Decor button feels complete and worth clicking, not just a label in the navigation.",
+    image: "assets/natural-craft/decor-living.jpg",
+    accentImage: "assets/natural-craft/p1130178.jpg",
+    notes: ["Room-led styling", "Kitchen textile utility", "Warm material mix"],
+    products: ["clay-bloom-serving-bowl", "reed-halo-lantern", "cedar-brass-board"]
+  },
+  "Fashion": {
+    badge: "Women's Apparel",
+    title: "Women's apparel gets a clearer campaign treatment and a full three-look lineup.",
+    copy: "The fashion section now has enough product depth to sell the category properly, with bright campaign visuals and three distinct co-ord looks that read well on cards.",
+    image: "assets/natural-craft/hero-alt-2.png",
+    accentImage: "assets/natural-craft/extra-31.png",
+    notes: ["Three distinct looks", "Color-led silhouettes", "Travel and holiday dressing"],
+    products: ["noor-wrap-co-ord", "mira-panel-dress", "tara-holiday-co-ord"]
+  },
+  "Gift Sets": {
+    badge: "Packed to Gift",
+    title: "Gift sets now show actual giftable textile bundles instead of mismatched apparel.",
+    copy: "This was the biggest content fix on the homepage. The section now shows folded, ready-to-gift products that actually belong under Gift Sets and help the button make sense immediately.",
+    image: "assets/natural-craft/promo-8-1.jpg",
+    accentImage: "assets/natural-craft/product-5.jpg",
+    notes: ["Festive gifting", "Folded bundle format", "Premium host picks"],
+    products: ["arav-camp-shirt-set", "sol-stripe-lounge-set", "citrus-host-gift-set"]
+  },
+  "Bedroom": {
+    badge: "Soft Living",
+    title: "Bedroom styling now has its own visual language and three products to back it up.",
+    copy: "Bedroom Styling now feels like a real homepage section with a bedroom-led hero image, softer supporting visuals, and three picks focused on calm textile layering.",
+    image: "assets/natural-craft/christopher-jolly.jpg",
+    accentImage: "assets/natural-craft/bedroom-alt.jpg",
+    notes: ["Bedside calm", "Layered bedding", "Soft neutral palette"],
+    products: ["meadow-quilt-cover", "haze-cushion-pair", "quiet-night-bedside-edit"]
+  }
+};
+
+function getCategoryProductCount(categoryId) {
+  return STORE.products.filter((product) => product.category === categoryId).length;
+}
+
+function renderCategoryCards() {
+  const target = document.querySelector("[data-category-grid]");
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = STORE.categories
+    .filter((category) => category.id !== "all")
+    .map((category) => {
+      const image = getCategoryImage(category);
+      const imageStyle = image
+        ? `background-image: linear-gradient(180deg, rgba(16, 18, 16, 0.22), rgba(16, 18, 16, 0.72)), url('${image}');`
+        : `--tone-a:${category.toneA}; --tone-b:${category.toneB};`;
+      const count = getCategoryProductCount(category.id);
+      return `
+        <a class="category-card reveal${image ? " category-card--image" : ""}" href="${category.href}" style="${imageStyle}">
+          <span class="category-card__eyebrow">${escapeHtml(category.eyebrow)}</span>
+          <h3>${escapeHtml(category.name)}</h3>
+          <p>${escapeHtml(category.copy)}</p>
+          <span class="category-card__count">${count} curated products</span>
+          <span class="button button--secondary">Explore</span>
+        </a>
+      `;
+    })
+    .join("");
+}
+
+function renderHomeProducts(categoryId = "Table Linen") {
+  const target = document.querySelector("[data-home-products]");
+  const filterTarget = document.querySelector("[data-home-filters]");
+  if (!target) {
+    return;
+  }
+
+  const activeId = HOME_SHOWCASES[categoryId] ? categoryId : HOME_CATEGORY_IDS[0];
+
+  if (filterTarget) {
+    filterTarget.innerHTML = HOME_CATEGORY_IDS.map((id) => {
+      const category = STORE.categories.find((item) => item.id === id);
+      const label = category ? category.name : id;
+      return `
+        <button class="chip" type="button" data-category-chip="${id}" aria-pressed="${id === activeId ? "true" : "false"}">
+          ${escapeHtml(label)}
+          <span class="chip__count">${getCategoryProductCount(id)}</span>
+        </button>
+      `;
+    }).join("");
+
+    filterTarget.querySelectorAll("[data-category-chip]").forEach((button) => {
+      button.addEventListener("click", () => {
+        renderHomeProducts(button.dataset.categoryChip);
+      });
+    });
+  }
+
+  const category = STORE.categories.find((item) => item.id === activeId) || STORE.categories[1];
+  const showcase = HOME_SHOWCASES[activeId];
+  const products = showcase.products
+    .map((slug) => getProductBySlug(slug))
+    .filter(Boolean)
+    .slice(0, 3);
+
+  target.innerHTML = `
+    <div class="featured-showcase reveal">
+      <article class="featured-showcase__lead">
+        <div class="featured-showcase__media">
+          <div class="featured-showcase__media-main">
+            <img src="${showcase.image}" alt="${escapeHtml(category.name)} showcase image" loading="eager">
+          </div>
+          <div class="featured-showcase__media-accent">
+            <img src="${showcase.accentImage}" alt="${escapeHtml(category.name)} supporting image" loading="lazy">
+          </div>
+          <div class="featured-showcase__badge">
+            <span>${escapeHtml(showcase.badge)}</span>
+            <strong>${products.length} matching products</strong>
+          </div>
+        </div>
+        <div class="featured-showcase__body">
+          <span class="featured-showcase__eyebrow">${escapeHtml(category.name)}</span>
+          <h3>${escapeHtml(showcase.title)}</h3>
+          <p>${escapeHtml(showcase.copy)}</p>
+          <div class="featured-showcase__notes">
+            ${showcase.notes.map((note) => `<span>${escapeHtml(note)}</span>`).join("")}
+          </div>
+          <a class="button button--primary" href="${category.href}">Explore ${escapeHtml(category.name)}</a>
+        </div>
+      </article>
+      <div class="product-grid featured-showcase__grid">
+        ${products.map(renderProductCard).join("")}
+      </div>
+    </div>
+  `;
+
+  activateReveals();
+}
+
