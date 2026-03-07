@@ -2185,3 +2185,299 @@ function renderHomeProducts(categoryId = "Table Linen") {
   activateReveals();
 }
 
+function syncNavToggleState(isOpen) {
+  document.querySelectorAll("[data-open-nav]").forEach((button) => {
+    button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+}
+
+function openMobileNav() {
+  document.body.classList.add("nav-open");
+  syncNavToggleState(true);
+}
+
+function closeMobileNav() {
+  document.body.classList.remove("nav-open");
+  syncNavToggleState(false);
+}
+
+function openCartDrawer() {
+  closeMobileNav();
+  document.body.classList.add("drawer-open");
+}
+
+function closeCartDrawer() {
+  document.body.classList.remove("drawer-open");
+}
+
+function renderShell() {
+  const headerTarget = document.querySelector("[data-header]");
+  const footerTarget = document.querySelector("[data-footer]");
+  const drawerTarget = document.querySelector("[data-cart-drawer]");
+  const page = document.body.dataset.page || "home";
+  const navCurrent = page === "product" ? "collections" : page;
+  const showMobileActions = ["home", "collections", "product", "story"].includes(page);
+
+  document.body.classList.toggle("has-mobile-actions", showMobileActions);
+  document.body.classList.remove("nav-open");
+
+  if (headerTarget) {
+    headerTarget.innerHTML = `
+      <div class="announcement">
+        <div class="container announcement__inner">
+          <span>Discover Natural Craft's latest table linen, decor, bedroom, and fashion launches.</span>
+          <span class="announcement__meta">Handcrafted textiles / gifting-ready packaging / local brand promotion build</span>
+        </div>
+      </div>
+      <header class="site-header">
+        <div class="container site-header__inner">
+          <a class="brand" href="index.html" aria-label="${escapeHtml(STORE.brand.name)} home">
+            <span class="brand__mark"><img class="brand__logo" src="${MEDIA.logo}" alt="${escapeHtml(STORE.brand.name)} logo"></span>
+            <span class="brand__text">
+              <span class="brand__name">${escapeHtml(STORE.brand.name)}</span>
+              <span class="brand__tag">${escapeHtml(STORE.brand.tagline)}</span>
+            </span>
+          </a>
+          <div class="site-header__mobile-tools">
+            <button class="mobile-nav-toggle" type="button" data-open-nav aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav-panel">
+              <span class="mobile-nav-toggle__bars" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+            <button class="mobile-cart-button" type="button" data-open-cart>
+              Cart
+              <span class="header-tools__count" data-cart-count>0</span>
+            </button>
+          </div>
+          <div class="site-header__panel" id="site-nav-panel" data-mobile-nav>
+            <nav class="site-nav" aria-label="Primary">
+              <a href="index.html" ${navCurrent === "home" ? 'aria-current="page"' : ""}>Home</a>
+              <a href="collections.html" ${navCurrent === "collections" ? 'aria-current="page"' : ""}>Collection</a>
+              <a href="story.html" ${navCurrent === "story" ? 'aria-current="page"' : ""}>Story</a>
+              <a href="checkout.html" ${navCurrent === "checkout" ? 'aria-current="page"' : ""}>Checkout</a>
+            </nav>
+            <div class="header-tools">
+              <a class="header-tools__button" href="collections.html">Shop Natural Craft</a>
+              <button class="header-tools__button" type="button" data-open-cart>
+                Cart
+                <span class="header-tools__count" data-cart-count>0</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <button class="mobile-nav-overlay" type="button" data-close-nav aria-label="Close navigation"></button>
+      ${
+        showMobileActions
+          ? `
+            <div class="mobile-action-bar">
+              <a class="mobile-action-bar__button" href="collections.html">Shop</a>
+              <button class="mobile-action-bar__button mobile-action-bar__button--primary" type="button" data-open-cart>
+                Cart
+                <span class="header-tools__count" data-cart-count>0</span>
+              </button>
+            </div>
+          `
+          : ""
+      }
+    `;
+  }
+
+  syncNavToggleState(false);
+
+  if (footerTarget) {
+    const browseLinks = STORE.categories
+      .filter((category) => category.id !== "all")
+      .map((category) => `<a href="${category.href}">${escapeHtml(category.name)}</a>`)
+      .join("");
+
+    footerTarget.innerHTML = `
+      <footer class="site-footer">
+        <div class="container">
+          <div class="site-footer__panel reveal">
+            <div class="site-footer__grid">
+              <div>
+                <div class="brand">
+                  <span class="brand__mark"><img class="brand__logo" src="${MEDIA.logo}" alt="${escapeHtml(STORE.brand.name)} logo"></span>
+                  <span class="brand__text">
+                    <span class="brand__name">${escapeHtml(STORE.brand.name)}</span>
+                    <span class="brand__tag">${escapeHtml(STORE.brand.tagline)}</span>
+                  </span>
+                </div>
+                <p>Natural Craft is presented here as a cleaner, image-rich brand promotion storefront built around its official table linen, decor, gifting, and fashion visuals.</p>
+                <form class="newsletter-form" data-newsletter-form>
+                  <input type="email" name="email" placeholder="Join for Natural Craft updates" required>
+                  <button class="button button--primary" type="submit">Join</button>
+                </form>
+              </div>
+              <div>
+                <h4>Browse</h4>
+                <div class="footer-links">${browseLinks}</div>
+              </div>
+              <div>
+                <h4>Connect</h4>
+                <div class="footer-links">
+                  <a href="https://natural-craft.com/" target="_blank" rel="noreferrer">Official website</a>
+                  <a href="https://natural-craft.com/shop/" target="_blank" rel="noreferrer">Official shop</a>
+                  <a href="https://wa.me/919582872075" target="_blank" rel="noreferrer">WhatsApp</a>
+                  <a href="tel:+919582872075">+91 95828 72075</a>
+                  <a href="story.html">Brand story</a>
+                </div>
+              </div>
+            </div>
+            <div class="site-footer__bottom">
+              <span>Natural Craft / handcrafted with love, softened by nature.</span>
+              <span data-year></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    `;
+  }
+
+  if (drawerTarget) {
+    drawerTarget.innerHTML = `
+      <div class="drawer-overlay" data-close-cart></div>
+      <aside class="cart-drawer" aria-label="Cart drawer">
+        <div class="cart-drawer__panel">
+          <div class="cart-drawer__header">
+            <div>
+              <div class="product-card__line">Natural Craft Cart</div>
+              <h3>Selected pieces, ready to review</h3>
+            </div>
+            <button class="button button--secondary" type="button" data-close-cart>Close</button>
+          </div>
+          <div class="cart-drawer__body" data-cart-drawer-body></div>
+          <div class="cart-drawer__footer" data-cart-drawer-footer></div>
+        </div>
+      </aside>
+    `;
+  }
+}
+
+function wireGlobalEvents() {
+  document.addEventListener("click", (event) => {
+    const navToggle = event.target.closest("[data-open-nav]");
+    if (navToggle) {
+      if (document.body.classList.contains("nav-open")) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+      return;
+    }
+
+    const closeNav = event.target.closest("[data-close-nav]");
+    if (closeNav) {
+      closeMobileNav();
+      return;
+    }
+
+    const navLink = event.target.closest("[data-mobile-nav] a");
+    if (navLink && window.innerWidth <= 760) {
+      closeMobileNav();
+    }
+
+    const openButton = event.target.closest("[data-open-cart]");
+    if (openButton) {
+      openCartDrawer();
+      return;
+    }
+
+    const closeButton = event.target.closest("[data-close-cart]");
+    if (closeButton) {
+      closeCartDrawer();
+      return;
+    }
+
+    const quickAdd = event.target.closest("[data-quick-add]");
+    if (quickAdd) {
+      addToCart(quickAdd.dataset.quickAdd);
+      syncCartUI();
+      openCartDrawer();
+      quickAdd.textContent = "Added";
+      window.setTimeout(() => {
+        quickAdd.textContent = "Add to Cart";
+      }, 900);
+      return;
+    }
+
+    const cartAction = event.target.closest("[data-cart-action]");
+    if (cartAction) {
+      const action = cartAction.dataset.cartAction;
+      const id = cartAction.dataset.cartId;
+      if (action === "increase") {
+        changeCartItem(id, 1);
+      } else if (action === "decrease") {
+        changeCartItem(id, -1);
+      } else if (action === "remove") {
+        removeCartItem(id);
+      }
+      syncCartUI();
+    }
+  });
+
+  document.addEventListener("submit", (event) => {
+    const productForm = event.target.closest("[data-product-form]");
+    if (productForm) {
+      event.preventDefault();
+      const formData = new FormData(productForm);
+      addToCart(productForm.dataset.slug, {
+        size: formData.get("size"),
+        color: formData.get("color"),
+        quantity: formData.get("quantity")
+      });
+      syncCartUI();
+      openCartDrawer();
+      return;
+    }
+
+    const newsletterForm = event.target.closest("[data-newsletter-form]");
+    if (newsletterForm) {
+      event.preventDefault();
+      newsletterForm.reset();
+      const next = newsletterForm.nextElementSibling;
+      if (next && next.classList.contains("success-message")) {
+        next.remove();
+      }
+      newsletterForm.insertAdjacentHTML(
+        "afterend",
+        `<p class="success-message">You're on the list. Expect new drops, restocks, and styling notes soon.</p>`
+      );
+      return;
+    }
+
+    const checkoutForm = event.target.closest("[data-checkout-form]");
+    if (checkoutForm) {
+      event.preventDefault();
+      const statusTarget = document.querySelector("[data-checkout-status]");
+      if (statusTarget) {
+        statusTarget.innerHTML = `
+          <div class="success-message">
+            Demo order placed. Your Natural Craft cart has been cleared locally and the confirmation flow can now be connected to a real backend.
+          </div>
+        `;
+      }
+      store.cart = [];
+      persistCart();
+      syncCartUI();
+      checkoutForm.reset();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMobileNav();
+      closeCartDrawer();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 760) {
+      closeMobileNav();
+    }
+  });
+}
+
